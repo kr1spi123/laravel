@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\MyPlaceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,8 +18,5 @@ Route::get('/', function () {
 });
 
 
-Route::get(
-    '/my_page', function() {
-        return "my page";
-    }
-);
+Route::get( '/my_page', [MyPlaceController::class, 'index'] );
+
