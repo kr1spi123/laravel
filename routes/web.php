@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyPlaceController;
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,5 +19,5 @@ Route::get('/', function () {
 });
 
 
-Route::get( '/my_page', [MyPlaceController::class, 'index'] );
+Route::get( '/my_page', [PostController::class, 'index'] );
 
