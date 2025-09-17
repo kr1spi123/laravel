@@ -63,4 +63,53 @@ class PostController extends Controller
         $post->restore();
         dd('delete page');
     }
+
+
+    // firstOrCreate
+    public function firstOrCreate()
+    {
+        $post = Post::find(1);
+        $anotherPost = [
+            'title' => 'some post',
+            'content' => 'some content',
+            'image' => 'some.jpg',
+            'likes' => 2600,
+            'is_published' => 1,
+        ];
+
+        $post = Post::firstOrCreate([
+            'title' => ' some title of post from vscode',
+        ], [
+            'title' => 'some title of post from vscode',
+            'content' => 'some content',
+            'image' => 'some.jpg',
+            'likes' => 2600,
+            'is_published' => 1,
+        ]);
+        dump($post->content);
+        dd(vars: 'finished');
+    }
+    // updateOrCreate
+    public function updateOrCreate()
+    {
+        $anotherPost = [
+            'title' => 'updateorcreate some post',
+            'content' => 'updateorcreate some content',
+            'image' => ' updateorcreate some.jpg',
+            'likes' => 600,
+            'is_published' => 1,
+        ];
+
+        $post = Post::updateOrCreate([
+            'title' => 'some title of post not vscode',
+        ], [
+            'title' => 'some title of post not vscode',
+            'content' => 'its not update some content',
+            'image' => ' its not update some.jpg',
+            'likes' => 600,
+            'is_published' => 1,
+        ]);
+
+        dump($post->content);
+    }
 }
