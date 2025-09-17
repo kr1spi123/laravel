@@ -11,9 +11,8 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::where('is_published', 1)->first();
-        dump($posts->title);
-        dd('end');
+        $posts = Post::all();
+        return view('posts', compact('posts'));
     }
 
     public function create()
@@ -21,14 +20,14 @@ class PostController extends Controller
         $postsArr = [
             [
                 'title' => 'title of post from vscode',
-                'content' => 'balblsalbasl',
+                'post_content' => 'balblsalbasl',
                 'image' => 'asdasl.jpg',
                 'likes' => 12,
                 'is_published' => 1,
             ],
             [
                 'title' => ' another title of post from vscode',
-                'content' => 'another balblsalbasl',
+                'post_content' => 'another balblsalbasl',
                 'image' => 'another asdasl.jpg',
                 'likes' => 22,
                 'is_published' => 1,
@@ -47,7 +46,7 @@ class PostController extends Controller
         $post = Post::find(6);
         $post->update([
             'title' => 'updated',
-            'content' => 'updated',
+            'post_content' => 'updated',
             'image' => 'updated.jpg',
             'likes' => 22,
             'is_published' => 1,
@@ -71,7 +70,7 @@ class PostController extends Controller
         $post = Post::find(1);
         $anotherPost = [
             'title' => 'some post',
-            'content' => 'some content',
+            'post_content' => 'some content',
             'image' => 'some.jpg',
             'likes' => 2600,
             'is_published' => 1,
@@ -81,7 +80,7 @@ class PostController extends Controller
             'title' => ' some title of post from vscode',
         ], [
             'title' => 'some title of post from vscode',
-            'content' => 'some content',
+            'post_content' => 'some content',
             'image' => 'some.jpg',
             'likes' => 2600,
             'is_published' => 1,
@@ -94,7 +93,7 @@ class PostController extends Controller
     {
         $anotherPost = [
             'title' => 'updateorcreate some post',
-            'content' => 'updateorcreate some content',
+            'post_content' => 'updateorcreate some content',
             'image' => ' updateorcreate some.jpg',
             'likes' => 600,
             'is_published' => 1,
@@ -104,7 +103,7 @@ class PostController extends Controller
             'title' => 'some title of post not vscode',
         ], [
             'title' => 'some title of post not vscode',
-            'content' => 'its not update some content',
+            'post_content' => 'its not update some content',
             'image' => ' its not update some.jpg',
             'likes' => 600,
             'is_published' => 1,
