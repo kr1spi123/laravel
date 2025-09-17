@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index(){
-        $post = Post::find(1);
-        dd($post);
+        $posts = Post::where('is_published',1)->first();
+        dump($posts->title);
+        dd('end');
     }
 }
