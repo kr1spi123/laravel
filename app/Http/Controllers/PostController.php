@@ -5,53 +5,50 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\ViewErrorBag;
 
 class PostController extends Controller
 {
     public function index()
     {
         $posts = Post::all();
-        return view('posts', compact('posts'));
+        return view('post.index', compact('posts'));
     }
 
     public function create()
     {
-        $postsArr = [
-            [
-                'title' => 'title of post from vscode',
-                'post_content' => 'balblsalbasl',
-                'image' => 'asdasl.jpg',
-                'likes' => 12,
-                'is_published' => 1,
-            ],
-            [
-                'title' => ' another title of post from vscode',
-                'post_content' => 'another balblsalbasl',
-                'image' => 'another asdasl.jpg',
-                'likes' => 22,
-                'is_published' => 1,
-            ],
-        ];
-
-        foreach ($postsArr as $item) {
-            Post::create($item);
-        }
-
-        dd('created');
+        return view('post.create');
     }
 
-    public function update()
+    public function store()
     {
-        $post = Post::find(6);
-        $post->update([
-            'title' => 'updated',
-            'post_content' => 'updated',
-            'image' => 'updated.jpg',
-            'likes' => 22,
-            'is_published' => 1,
+        $data = request()->validate([
+            'title' => 'string',
+            'content' => 'string',
+            'image' => 'string',
         ]);
-        dd('updated');
+        Post::create($data);
+        return redirect()->route('post.index');
+    }
+
+    public function show(Post $post)
+    {
+        return view('post.show', compact('post'));
+    }
+
+    public function edit(Post $post)
+    {
+        return view('post.edit', compact('post'));
+    }
+    public function update(Post $post)
+    {
+        $data = request()->validate([
+            'title' => 'string',
+            'content' => 'string',
+            'image' => 'string',
+        ]);
+        $post->update($data);
+        return redirect()->route('post.show', $post->id);
     }
 
 
@@ -60,9 +57,12 @@ class PostController extends Controller
 
         $post = Post::withTrashed()->find(2);
         $post->restore();
-        dd('delete page');
+        dd('deleted');
     }
-
+    public function destroy(Post $post){
+        $post->delete();
+        return redirect()->route('post.index');
+    }
 
     // firstOrCreate
     public function firstOrCreate()
