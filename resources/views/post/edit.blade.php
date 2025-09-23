@@ -21,9 +21,21 @@
             <select multiple class="form-control" id="category" name="category_id">
                 @foreach ($categories as $category)
                 <option
-                    {{ $category->id === $post->category_id ? 'selected' : '' }}
+                    {{ $category->id === $post->category->id ? 'selected' : '' }}
 
-                 value="{{ $category->id }}">{{ $category->title }}</option>
+                    value="{{ $category->id }}">{{ $category->title }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="tags">Tags</label>
+            <select multiple name="tags[]" id="tags" class="form-control">
+                @foreach ($tags as $tag)
+                <option
+                @foreach ($post->tags as $postTag)
+                {{ $tag->id === $postTag->id ? 'selected' : '' }}
+                @endforeach
+                value="{{ $tag->id }}">{{ $tag->title }}</option>
                 @endforeach
             </select>
         </div>
