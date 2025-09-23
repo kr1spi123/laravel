@@ -10,13 +10,24 @@
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">Content</label>
-            <textarea  class="form-control" id="content" placeholder="Content" name="content" >{{ $post->content }}</textarea>
+            <textarea class="form-control" id="content" placeholder="Content" name="content">{{ $post->content }}</textarea>
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
             <input type="text" class="form-control" id="image" placeholder="image" name="image" value="{{ $post->title }}">
         </div>
-        <button type="submit" class="btn btn-primary">Create</button>
+        <div class="mb-3">
+            <label for="category">Category</label>
+            <select class="form-control" id="category" name="category_id">
+                @foreach ($categories as $category)
+                <option
+                    {{ $category->id === $post->category_id ? 'selected' : '' }}
+
+                 value="{{ $category->id }}">{{ $category->title }}</option>
+                @endforeach
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
     </form>
 </div>
 @endsection
