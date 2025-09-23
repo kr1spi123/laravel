@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\ViewErrorBag;
@@ -12,7 +12,11 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('post.index', compact('posts'));
+
+        $category = Category::find(1);
+        $post = Post::find(1);
+        dd($post->category);
+        // return view('post.index', compact('posts'));
     }
 
     public function create()
@@ -59,7 +63,8 @@ class PostController extends Controller
         $post->restore();
         dd('deleted');
     }
-    public function destroy(Post $post){
+    public function destroy(Post $post)
+    {
         $post->delete();
         return redirect()->route('post.index');
     }
