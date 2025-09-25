@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
     use HasFactory;
-
-    public function posts(){
+    protected $guarded = false;
+    public function posts()
+    {
         return $this->belongsToMany(Post::class);
     }
 }
