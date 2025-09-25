@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Post;
 
 use App\Models\Post;
 use App\Http\Controllers\Controller;
+use App\Services\Post\BaseController;
 
-
-class DestroyController extends Controller
+class DestroyController extends BaseController
 {
     public function __invoke(Post $post)
     {

@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Post;
 
 use App\Models\Post;
 use App\Http\Controllers\Controller;
+use App\Services\Post\BaseController;
 
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     public function __invoke(){
         $posts = Post::all();
