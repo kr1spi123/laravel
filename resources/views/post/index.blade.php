@@ -19,7 +19,6 @@
             <p class="mb-1 text-muted">
                 {{ $post->content }}
             </p>
-
         </a>
         @endforeach
     </div>
