@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Post;
 
 use App\Models\Post;
 use App\Http\Controllers\Controller;
-use App\Services\Post\BaseController;
 use App\Http\Requests\Post\StoreRequest;
 
 class StoreController extends BaseController
@@ -14,7 +13,7 @@ class StoreController extends BaseController
         $data = $request->validated();
 
         $this->service->store($data);
-        
+
         return redirect()->route('post.index');
     }
 }
