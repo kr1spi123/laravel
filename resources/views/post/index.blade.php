@@ -8,7 +8,7 @@
             <i class="fas fa-plus"></i> Добавить пост
         </a>
     </div>
-    
+
     <div class="list-group">
         @foreach ($posts as $post)
         <a href="{{ route('post.show', $post->id) }}" class="list-group-item list-group-item-action">
@@ -22,7 +22,7 @@
         </a>
         @endforeach
         <div>
-            {{ $posts->links() }}
+            {{ $posts->withQueryString()->links() }}
         </div>
     </div>
 @endsection

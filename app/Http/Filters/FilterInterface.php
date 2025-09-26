@@ -5,7 +5,7 @@ namespace App\Http\Filters;
 
 use Illuminate\Contracts\Database\Eloquent\Builder;
 
-class FilterInterface
+interface FilterInterface
 {
-    public function apply(Builder $builder)
+    public function apply(Builder $builder);
 }
