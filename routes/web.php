@@ -11,6 +11,8 @@ use App\Http\Controllers\Post\StoreController;
 use App\Http\Controllers\Post\CreateController;
 use App\Http\Controllers\Post\UpdateController;
 use App\Http\Controllers\Post\DestroyController;
+use App\Http\Controllers\Admin\Post\IndexController as AdminPostIndexController;
+
 
 
 
@@ -26,6 +28,11 @@ Route::group(['namespace' => 'Post'], function(){
     Route::delete('/posts/{post}', [DestroyController::class, '__invoke'])->name('post.delete');
 });
 
-Route::get( '/main', [MainController::class, 'index'] )->name('main.index');
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
+    Route::group(['namespace' => 'Post'], function () {
+        Route::get('/post', [AdminPostIndexController::class, '__invoke'])->name('admin.post.index');
+    });
+});
+
 Route::get( '/contacts', [ContactController::class, 'index'] )->name('contact.index');
 Route::get( '/about', [AboutController::class, 'index'] )->name('about.index');

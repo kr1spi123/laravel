@@ -11,11 +11,6 @@
     <nav class="container">
         <ul class="nav py-2">
             <li class="nav-item">
-                <a class="nav-link text-dark fw-medium" href="{{ route('main.index') }}">
-                    <i class="fas fa-home me-1"></i>Главная
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link text-dark fw-medium" href="{{ route('post.index') }}">
                     <i class="fas fa-newspaper me-1"></i>Посты
                 </a>
