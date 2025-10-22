@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AboutController;
@@ -12,9 +13,16 @@ use App\Http\Controllers\Post\CreateController;
 use App\Http\Controllers\Post\UpdateController;
 use App\Http\Controllers\Post\DestroyController;
 use App\Http\Controllers\Admin\Post\IndexController as AdminPostIndexController;
+use Illuminate\Support\Facades\Auth;
 
+Auth::routes();
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admin'], function () {
+    Route::group(['namespace' => 'Post'], function () {
+        Route::get('/posts', [AdminPostIndexController::class, '__invoke'])->name('admin.post.index');
+    });
+});
 
 
 Route::group(['namespace' => 'Post'], function(){
@@ -28,11 +36,9 @@ Route::group(['namespace' => 'Post'], function(){
     Route::delete('/posts/{post}', [DestroyController::class, '__invoke'])->name('post.delete');
 });
 
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
-    Route::group(['namespace' => 'Post'], function () {
-        Route::get('/post', [AdminPostIndexController::class, '__invoke'])->name('admin.post.index');
-    });
-});
-
 Route::get( '/contacts', [ContactController::class, 'index'] )->name('contact.index');
 Route::get( '/about', [AboutController::class, 'index'] )->name('about.index');
+
+
+
+

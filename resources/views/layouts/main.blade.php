@@ -25,6 +25,14 @@
                     <i class="fas fa-envelope me-1"></i>Контакты
                 </a>
             </li>
+
+            @can('view', auth()->user())
+            <li class="nav-item">
+                <a class="nav-link text-dark fw-medium" href="{{ route('admin.post.index') }}">
+                    <i class="fas fa-envelope me-1"></i>Admin
+                </a>
+            </li>
+            @endcan
         </ul>
     </nav>
 </div>
